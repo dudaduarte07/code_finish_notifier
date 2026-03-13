@@ -1,0 +1,96 @@
+{
+  "name": "code-finish-notifier",
+  "displayName": "Code Finish Notifier",
+  "description": "Shows a popup and optional sound when code execution ends in debug, tasks, or terminal.",
+  "version": "0.0.1",
+  "publisher": "Duda Duarte07",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onDebug",
+    "onTerminalShellIntegration"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeFinishNotifier.testSuccess",
+        "title": "Code Finish Notifier: Test Success Notification"
+      },
+      {
+        "command": "codeFinishNotifier.testError",
+        "title": "Code Finish Notifier: Test Error Notification"
+      }
+    ],
+    "configuration": {
+      "title": "Code Finish Notifier",
+      "properties": {
+        "codeFinishNotifier.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable notifications when executions end."
+        },
+        "codeFinishNotifier.showPopup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a VS Code popup when an execution finishes."
+        },
+        "codeFinishNotifier.playSound": {
+          "type": "boolean",
+          "default": false,
+          "description": "Play a system beep when an execution finishes."
+        },
+        "codeFinishNotifier.notifyOn": {
+          "type": "string",
+          "enum": [
+            "success",
+            "error",
+            "both"
+          ],
+          "default": "both",
+          "description": "Choose whether to notify on success, error, or both."
+        },
+        "codeFinishNotifier.showDesktopNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostra notificação nativa do sistema operacional."
+        },
+        "codeFinishNotifier.focusFinishedTerminal": {
+          "type": "boolean",
+          "default": false,
+          "description": "Quando terminar, traz automaticamente o terminal/código relacionado para frente."
+        },
+        "codeFinishNotifier.includeDuration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include execution duration when available."
+        },
+        "codeFinishNotifier.includeCommandPreview": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include a preview of the command line in terminal notifications."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.14.10",
+    "@types/node-notifier": "^8.0.5",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "node-notifier": "^10.0.1"
+  }
+}
